@@ -4,6 +4,17 @@ let app = express();
 
 console.log("Hello World");
 
+app.use(reqLogger);
+function reqLogger(req, res, next) {
+    let logMethod = req.method;
+    let logPath = req.path;
+    let logIp = req.ip;
+    console.log(logMethod + ' ' + logPath + ' - ' + logIp);
+
+    next();
+}
+
+
 app.get('/', rootPage);
 
 
