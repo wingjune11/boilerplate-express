@@ -16,8 +16,6 @@ function reqLogger(req, res, next) {
 
 
 app.get('/', rootPage);
-
-
 function rootPage(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 }
@@ -25,15 +23,21 @@ function rootPage(req, res) {
 app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/json',serveJson);
-
 function serveJson(req, res) {
     if(process.env.MESSAGE_STYLE === "uppercase") {
         res.json({"message": "Hello json".toUpperCase()});
     } else {
         res.json({"message": "Hello json"})
-    }
-    
+    }   
 }
+
+//Chain Middleware to Create a Time Server
+app.get('/now', (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+}, (req, res) => {
+    res.send({time: req.time});
+});
 
 
 
