@@ -15,6 +15,7 @@ console.log("Hello World");
 //     next();
 // }
 
+//Use body-parser to Parse POST Requests
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', rootPage);
@@ -47,11 +48,14 @@ app.get('/:word/echo', (req, res) => {
 })
 
 //Get Query Parameter Input from the Client
-app.get('/name', (req, res) => {
-    res.json({"name": req.query.first + ' ' + req.query.last})
+// app.get('/name', (req, res) => {
+//     res.json({"name": req.query.first + ' ' + req.query.last});
+// })
+
+//Get Data from POST Requests
+app.post('/name', (req, res) => {
+    res.json({"name": req.body.first + ' ' + req.body.last});
 })
-
-
 
 
 
