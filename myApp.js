@@ -12,6 +12,12 @@ function rootPage(req, res) {
 
 app.use('/public', express.static(__dirname + '/public'));
 
+app.get('/json',serveJson);
+
+function serveJson(req, res) {
+    res.json({"message": "Hello json"});
+}
+
 
 
 
